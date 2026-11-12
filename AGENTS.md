@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Account type (entreprise/particulier) lives on `profiles.account_type`, set from signup metadata by the `handle_new_user` trigger; roles live only in `user_roles`. Why: one signup trigger keeps both flows consistent and prevents privilege escalation.
+- Pricing grids live in `src/lib/pricing.ts` and are covered by `pricing.test.ts`. Why: a single source for the pricing page and docs.

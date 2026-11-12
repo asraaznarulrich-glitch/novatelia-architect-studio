@@ -10,33 +10,148 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as ConnexionRouteImport } from './routes/connexion'
+import { Route as DocumentationRouteImport } from './routes/documentation'
+import { Route as PartenairesRouteImport } from './routes/partenaires'
+import { Route as TarifsRouteImport } from './routes/tarifs'
+import { Route as AuthenticatedEspaceRouteImport } from './routes/_authenticated/espace'
+import { Route as InscriptionIndexRouteImport } from './routes/inscription/index'
+import { Route as InscriptionEntrepriseRouteImport } from './routes/inscription/entreprise'
+import { Route as InscriptionParticulierRouteImport } from './routes/inscription/particulier'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnexionRoute = ConnexionRouteImport.update({
+  id: '/connexion',
+  path: '/connexion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentationRoute = DocumentationRouteImport.update({
+  id: '/documentation',
+  path: '/documentation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartenairesRoute = PartenairesRouteImport.update({
+  id: '/partenaires',
+  path: '/partenaires',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TarifsRoute = TarifsRouteImport.update({
+  id: '/tarifs',
+  path: '/tarifs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedEspaceRoute = AuthenticatedEspaceRouteImport.update({
+  id: '/espace',
+  path: '/espace',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const InscriptionIndexRoute = InscriptionIndexRouteImport.update({
+  id: '/inscription/',
+  path: '/inscription/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InscriptionEntrepriseRoute = InscriptionEntrepriseRouteImport.update({
+  id: '/inscription/entreprise',
+  path: '/inscription/entreprise',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InscriptionParticulierRoute = InscriptionParticulierRouteImport.update({
+  id: '/inscription/particulier',
+  path: '/inscription/particulier',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
+  '/documentation': typeof DocumentationRoute
+  '/partenaires': typeof PartenairesRoute
+  '/tarifs': typeof TarifsRoute
+  '/espace': typeof AuthenticatedEspaceRoute
+  '/inscription/entreprise': typeof InscriptionEntrepriseRoute
+  '/inscription/particulier': typeof InscriptionParticulierRoute
+  '/inscription/': typeof InscriptionIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
+  '/documentation': typeof DocumentationRoute
+  '/partenaires': typeof PartenairesRoute
+  '/tarifs': typeof TarifsRoute
+  '/espace': typeof AuthenticatedEspaceRoute
+  '/inscription/entreprise': typeof InscriptionEntrepriseRoute
+  '/inscription/particulier': typeof InscriptionParticulierRoute
+  '/inscription': typeof InscriptionIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/connexion': typeof ConnexionRoute
+  '/documentation': typeof DocumentationRoute
+  '/partenaires': typeof PartenairesRoute
+  '/tarifs': typeof TarifsRoute
+  '/_authenticated/espace': typeof AuthenticatedEspaceRoute
+  '/inscription/entreprise': typeof InscriptionEntrepriseRoute
+  '/inscription/particulier': typeof InscriptionParticulierRoute
+  '/inscription/': typeof InscriptionIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/connexion'
+    | '/documentation'
+    | '/partenaires'
+    | '/tarifs'
+    | '/espace'
+    | '/inscription/entreprise'
+    | '/inscription/particulier'
+    | '/inscription/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/connexion'
+    | '/documentation'
+    | '/partenaires'
+    | '/tarifs'
+    | '/espace'
+    | '/inscription/entreprise'
+    | '/inscription/particulier'
+    | '/inscription'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/connexion'
+    | '/documentation'
+    | '/partenaires'
+    | '/tarifs'
+    | '/_authenticated/espace'
+    | '/inscription/entreprise'
+    | '/inscription/particulier'
+    | '/inscription/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  ConnexionRoute: typeof ConnexionRoute
+  DocumentationRoute: typeof DocumentationRoute
+  PartenairesRoute: typeof PartenairesRoute
+  TarifsRoute: typeof TarifsRoute
+  InscriptionEntrepriseRoute: typeof InscriptionEntrepriseRoute
+  InscriptionParticulierRoute: typeof InscriptionParticulierRoute
+  InscriptionIndexRoute: typeof InscriptionIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +163,93 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connexion': {
+      id: '/connexion'
+      path: '/connexion'
+      fullPath: '/connexion'
+      preLoaderRoute: typeof ConnexionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentation': {
+      id: '/documentation'
+      path: '/documentation'
+      fullPath: '/documentation'
+      preLoaderRoute: typeof DocumentationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partenaires': {
+      id: '/partenaires'
+      path: '/partenaires'
+      fullPath: '/partenaires'
+      preLoaderRoute: typeof PartenairesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tarifs': {
+      id: '/tarifs'
+      path: '/tarifs'
+      fullPath: '/tarifs'
+      preLoaderRoute: typeof TarifsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/espace': {
+      id: '/_authenticated/espace'
+      path: '/espace'
+      fullPath: '/espace'
+      preLoaderRoute: typeof AuthenticatedEspaceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/inscription/': {
+      id: '/inscription/'
+      path: '/inscription'
+      fullPath: '/inscription/'
+      preLoaderRoute: typeof InscriptionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inscription/entreprise': {
+      id: '/inscription/entreprise'
+      path: '/inscription/entreprise'
+      fullPath: '/inscription/entreprise'
+      preLoaderRoute: typeof InscriptionEntrepriseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inscription/particulier': {
+      id: '/inscription/particulier'
+      path: '/inscription/particulier'
+      fullPath: '/inscription/particulier'
+      preLoaderRoute: typeof InscriptionParticulierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedEspaceRoute: typeof AuthenticatedEspaceRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedEspaceRoute: AuthenticatedEspaceRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  ConnexionRoute: ConnexionRoute,
+  DocumentationRoute: DocumentationRoute,
+  PartenairesRoute: PartenairesRoute,
+  TarifsRoute: TarifsRoute,
+  InscriptionEntrepriseRoute: InscriptionEntrepriseRoute,
+  InscriptionParticulierRoute: InscriptionParticulierRoute,
+  InscriptionIndexRoute: InscriptionIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
